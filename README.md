@@ -1,11 +1,11 @@
-# Steering Activation Vectors
+# Activation Vector Steering for LLM Mechanistic Interpretability
 
-This repo is a small workspace for trying two different styles of activation steering:
+This public repo collects two practical activation-steering paths in one place:
 
 - [`steering-vectors-steering/`](steering-vectors-steering): a minimal `steering-vectors` demo using GPT-2 and a saved `.pt` steering vector
 - [`easysteer-steering/`](easysteer-steering): a wrapper around an [EasySteer](easysteer-steering/EasySteer) submodule checkout for GPU-backed steering with a custom `vllm` tree
 
-The two paths are intentionally separate. The small demo is simple and lightweight. The EasySteer path is much heavier, CUDA-dependent, and brings its own environment and upstream codebase.
+The two paths are intentionally separate. The GPT-2 path is small and easy to inspect. The EasySteer path is CUDA-heavy, uses upstream forks as submodules, and is closer to a high-performance research stack.
 
 ## What This Repo Is For
 
@@ -15,7 +15,13 @@ Use this repo if you want to:
 - compare that with a larger production-style steering stack built on EasySteer and `vllm`
 - keep wrapper scripts, pretrained vectors, and upstream EasySteer code in one place
 
-This repo is better thought of as a workspace than as one unified Python package.
+This repo is a workspace, not one unified Python package.
+
+## Highlights
+
+- minimal end-to-end steering example with a cached vector
+- larger EasySteer + `vllm` setup for GPU-backed steering experiments
+- public fork structure preserved through submodules instead of copying large upstream trees into the root repo
 
 ## Which Path To Use
 
@@ -46,11 +52,9 @@ Important top-level files and folders:
 - [`steering-vectors-steering/`](steering-vectors-steering): the lightweight demo and its cached steering vector.
 - [`easysteer-steering/`](easysteer-steering): the EasySteer wrapper layer plus the upstream project checked out at [`EasySteer/`](easysteer-steering/EasySteer) as a submodule.
 
-## Clone With Submodules
+## Quick Start
 
-The EasySteer path depends on git submodules.
-
-For a fresh clone, use:
+Clone the repo with submodules:
 
 ```bash
 git clone --recurse-submodules https://github.com/BurnyCoder/activation-vector-steering-llms-mechanistic-interpretability.git
@@ -61,6 +65,17 @@ If you already cloned without submodules:
 ```bash
 git submodule update --init --recursive
 ```
+
+Then choose one path:
+
+- [`steering-vectors-steering/`](steering-vectors-steering) for the smallest demo
+- [`easysteer-steering/`](easysteer-steering) for the EasySteer-based GPU workflow
+
+## Clone With Submodules
+The EasySteer path depends on git submodules. The root repo points to:
+
+- [`BurnyCoder/EasySteer`](https://github.com/BurnyCoder/EasySteer)
+- [`BurnyCoder/EasySteer-vllm-v1`](https://github.com/BurnyCoder/EasySteer-vllm-v1)
 
 ## `steering-vectors-steering`
 
@@ -267,3 +282,9 @@ If you want more detail than this root README gives, use these docs next:
 - [`steering-vectors-steering/`](steering-vectors-steering) is the small CPU/GPU-friendly GPT-2 demo and should use either `../.venv` or a new local `./.venv` at the repo root.
 - [`easysteer-steering/`](easysteer-steering) is the CUDA-heavy EasySteer path and should use the EasySteer-specific environment documented in [`easysteer-steering/README.md`](easysteer-steering/README.md).
 - The root README explains how the workspace fits together. The subproject READMEs remain the detailed source of truth for their own setup and usage.
+
+## License
+
+The top-level wrapper code and documentation in this repo are licensed under Apache-2.0. See [LICENSE](LICENSE).
+
+The nested EasySteer and `vllm-steer` codebases are separate submodule checkouts and keep their own license files in their respective repos.
