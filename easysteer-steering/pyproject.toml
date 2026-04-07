@@ -1,0 +1,12 @@
+[project]
+name = "easysteer-steering-demo"
+version = "0.1.0"
+description = "Run the EasySteer steering demo from this wrapper directory"
+readme = "README.md"
+requires-python = ">=3.10,<3.14"
+dependencies = [
+    "vllm",
+]
+
+[tool.uv.sources]
+vllm = { path = "./EasySteer/vllm-steer", editable = true }

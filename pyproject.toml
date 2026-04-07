@@ -1,0 +1,11 @@
+[project]
+name = "steering-activation-vectors"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "steering-vectors",
+    "transformers",
+    "torch",
+]

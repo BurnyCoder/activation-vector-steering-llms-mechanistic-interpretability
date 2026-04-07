@@ -1,0 +1,3 @@
+[submodule "easysteer-steering/EasySteer"]
+	path = easysteer-steering/EasySteer
+	url = https://github.com/BurnyCoder/EasySteer.git
