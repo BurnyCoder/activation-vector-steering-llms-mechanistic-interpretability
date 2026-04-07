@@ -107,23 +107,13 @@ You have two supported options:
 
 #### Option A: reuse the shared parent environment at `../.venv`
 
-If you already keep a Python 3.12 environment one level above the repo, you can reuse it.
-
-For a standalone clone of this repo, sync the active parent environment with this project's dependencies without pruning unrelated packages:
+In this checkout, the existing shared environment is `../.venv` relative to the repo root.
 
 ```bash
 source ../.venv/bin/activate
-uv sync --active --inexact --no-install-project
+uv pip install steering-vectors transformers torch
 cd steering-vectors-steering
 python steering-vectors-steering.py
-```
-
-`--inexact` matters for a shared environment because plain `uv sync` removes extraneous packages.
-
-If this repo is nested inside a larger `uv` workspace, `uv sync --active` may resolve against the parent workspace lockfile instead of this repo. In that case, either use Option B with a local `./.venv`, or install the three runtime dependencies directly into the shared environment:
-
-```bash
-uv pip install steering-vectors transformers torch
 ```
 
 #### Option B: create a new local environment in `./.venv`
